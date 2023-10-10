@@ -15,4 +15,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "PosApp"
 include(":app")
-include(":core:core-database")
+include(":core:database")
+include(":core:data")
+include(":core:domain")
+include(":core:preferences")
+include(":core:connectivity")

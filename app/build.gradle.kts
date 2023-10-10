@@ -56,7 +56,7 @@ android {
 dependencies {
 
     // modules
-
+    implementation(project(":core:database"))
 
     // splash screen
     implementation(libs.splashscreen)
@@ -65,7 +65,6 @@ dependencies {
     implementation(libs.room.android)
     implementation(libs.room.ktx)
     implementation(libs.room.paging)
-
     kapt(libs.room.compiler)
 
     // hilt
