@@ -61,6 +61,10 @@ dependencies {
     // splash screen
     implementation(libs.splashscreen)
 
+    // paging
+    implementation(libs.paging.compose)
+    implementation(libs.paging.runtime)
+
     // room
     implementation(libs.room.android)
     implementation(libs.room.ktx)

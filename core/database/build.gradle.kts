@@ -2,6 +2,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    kotlin("kapt")
+    alias(libs.plugins.com.google.dagger.hilt.android)
 }
 
 android {
@@ -34,6 +36,22 @@ android {
 }
 
 dependencies {
+
+    // module
+    api(project(":core:domain"))
+
+    // hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+    api(libs.room.android)
+    api(libs.room.ktx)
+    api(libs.room.paging)
+    kapt(libs.room.compiler)
+
+    api(libs.paging.compose)
+    api(libs.paging.runtime)
+
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
