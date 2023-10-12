@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="create_passwd_for_security">Créer un mot de passe pour la sécurité.</string>
+    <string name="name">Nom</string>
+    <string name="connection">Connexion</string>
+    <string name="password">Mot de passe</string>
+    <string name="save">Enregistrer</string>
+    <string name="header_text_register">Insérer les informations nécessaires à l\'enregistrement.</string>
+    <string name="enter_password_for_show_home">Entrez votre mot de passe afin d\'accéder à l\'interface d\'accueil.</string>
+</resources>

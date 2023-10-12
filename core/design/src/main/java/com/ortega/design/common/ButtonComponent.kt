@@ -6,6 +6,7 @@ import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -40,6 +41,7 @@ fun ButtonComponent(
         modifier = Modifier
             .height(height = HeightButton)
             .fillMaxWidth()
+            .padding(horizontal = Padding)
             .animateContentSize(
                 animationSpec = tween(
                     durationMillis = 300,

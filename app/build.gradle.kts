@@ -56,7 +56,7 @@ android {
 dependencies {
 
     // modules
-    //implementation(project(":feature:auth"))
+    implementation(project(":feature:auth"))
 
     // splash screen
     implementation(libs.splashscreen)

@@ -13,6 +13,8 @@ fun colorsTextFieldComponent(): TextFieldColors {
     return TextFieldDefaults.colors(
         focusedLeadingIconColor = White,
         unfocusedLeadingIconColor = Color.Gray,
+        focusedTrailingIconColor = White,
+        unfocusedTrailingIconColor = Color.Gray,
         unfocusedTextColor = White,
         focusedTextColor = White,
         cursorColor = White,

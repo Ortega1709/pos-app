@@ -6,4 +6,4 @@ val HeightTextField = 50.dp
 val Margin = 16.dp
 val Padding = 16.dp
 
-val HeightButton = 55.dp
+val HeightButton = 50.dp
