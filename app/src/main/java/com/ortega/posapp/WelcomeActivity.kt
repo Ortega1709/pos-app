@@ -2,7 +2,6 @@ package com.ortega.posapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,7 +28,7 @@ class WelcomeActivity : ComponentActivity() {
 
         setContent {
             val viewModel: AuthViewModel = hiltViewModel()
-            if (viewModel.alreadyAuthenticated() != "") {
+            if (viewModel.alreadyAuthenticated()) {
 
                 val intent = Intent(this, LoginActivity::class.java).setAction("")
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

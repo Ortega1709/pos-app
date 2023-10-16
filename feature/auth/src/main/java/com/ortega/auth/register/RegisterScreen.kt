@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Password
 import androidx.compose.material.icons.rounded.Person2
@@ -23,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.navigation.NavController
 import com.ortega.auth.AuthViewModel
 import com.ortega.auth.R
 import com.ortega.design.auth.HeaderImageComponent
@@ -32,7 +33,6 @@ import com.ortega.design.common.ButtonComponent
 import com.ortega.design.common.HeightSpacer
 import com.ortega.design.common.PasswordFieldComponent
 import com.ortega.design.common.TextFieldComponent
-import com.ortega.design.common.ToastComponent
 import com.ortega.design.theme.Padding
 import com.ortega.domain.model.User
 import kotlinx.coroutines.launch
@@ -63,6 +63,7 @@ fun RegisterScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues = paddingValues)
+                    .verticalScroll(rememberScrollState())
             ) {
 
                 HeaderImageComponent()
