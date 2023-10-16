@@ -1,7 +1,7 @@
 package com.ortega.database.entity.mapper
 
 import com.ortega.database.entity.UserEntity
-import com.ortega.domain.User
+import com.ortega.domain.model.User
 
 object UserEntityMapper : EntityMapper<User, UserEntity> {
     override fun toEntity(domain: User): UserEntity {

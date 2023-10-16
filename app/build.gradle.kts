@@ -69,6 +69,10 @@ dependencies {
     implementation(libs.room.android)
     implementation(libs.room.ktx)
     implementation(libs.room.paging)
+    implementation(platform(libs.compose.bom))
+    implementation(platform(libs.compose.bom))
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation(platform(libs.compose.bom))
     kapt(libs.room.compiler)
 
     // hilt

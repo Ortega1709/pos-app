@@ -15,7 +15,7 @@ import dagger.hilt.components.SingletonComponent
 object DatabaseModule {
 
     @Provides
-    fun providePostDb(@ApplicationContext context: Context): PosDb {
+    fun providePosDb(@ApplicationContext context: Context): PosDb {
         return Room.databaseBuilder(
             context = context,
             klass = PosDb::class.java,

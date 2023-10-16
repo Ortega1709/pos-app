@@ -1,4 +1,4 @@
-package com.ortega.domain
+package com.ortega.domain.model
 
 import java.util.UUID
 

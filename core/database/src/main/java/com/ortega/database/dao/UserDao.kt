@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.ortega.database.entity.UserEntity
+import com.ortega.domain.model.User
 
 @Dao
 interface UserDao {
@@ -12,6 +13,6 @@ interface UserDao {
     suspend fun insertUser(userEntity: UserEntity)
 
     @Query("SELECT * FROM user WHERE password = :password")
-    suspend fun getUser(password: String)
+    suspend fun getUser(password: String): User?
 
 }

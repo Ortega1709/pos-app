@@ -6,7 +6,10 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.ortega.domain.User
+import com.ortega.domain.model.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 
 class UserPreferences(private val context: Context) {
 
@@ -30,5 +33,8 @@ class UserPreferences(private val context: Context) {
             it.clear()
         }
     }
+
+    fun getUserPassword() =
+        context.dataStore.data.map { it[PASSWORD_KEY] ?: "" }.flowOn(Dispatchers.IO)
 
 }

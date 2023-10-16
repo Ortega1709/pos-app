@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -51,16 +52,18 @@ fun ButtonComponent(
     ) {
 
         AnimatedVisibility(visible = isLoading) {
-            CircularProgressIndicator(
-                color = White,
-                modifier = Modifier
-                    .width(25.dp)
-                    .height(25.dp),
+            Row {
+                CircularProgressIndicator(
+                    color = White,
+                    modifier = Modifier
+                        .width(25.dp)
+                        .height(25.dp)
 
                 )
-
-            WidthSpacer(width = Padding / 2)
+                WidthSpacer(width = Padding / 2)
+            }
         }
+        
 
         TextComponent(
             text = text,

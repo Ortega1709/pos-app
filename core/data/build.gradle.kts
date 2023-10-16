@@ -36,6 +36,11 @@ android {
 
 dependencies {
 
+    // module
+    api(project(":core:domain"))
+    implementation(project(":core:database"))
+    implementation(project(":core:preferences"))
+
     // hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
