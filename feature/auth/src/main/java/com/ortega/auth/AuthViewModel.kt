@@ -21,7 +21,7 @@ class AuthViewModel @Inject constructor(
     private val userRepositoryImpl: UserRepositoryImpl
 ) : ViewModel() {
 
-    private var _userPassword by mutableStateOf("")
+    private var _userPassword by mutableStateOf(false)
 
     private var _uiState = MutableStateFlow(AuthUiState())
     val uiState = _uiState.asStateFlow()
@@ -47,11 +47,11 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun alreadyAuthenticated(): String {
+    fun alreadyAuthenticated(): Boolean {
 
         viewModelScope.launch {
             userRepositoryImpl.getUserPassword().collectLatest {
-                _userPassword = it
+                _userPassword = it != ""
             }
         }
 

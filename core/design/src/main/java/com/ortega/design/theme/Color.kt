@@ -3,7 +3,7 @@ package com.ortega.design.theme
 import androidx.compose.ui.graphics.Color
 
 
-val Black = Color(0xFF000000)
+val Black = Color(0xFF111111)
 val DarkGray = Color(0xFF1C1C1E)
 val Gray = Color(0xFFCAC4D0)
 val Blue = Color(0xFF5468FD)

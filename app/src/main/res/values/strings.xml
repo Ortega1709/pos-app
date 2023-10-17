@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PosApp</string>
+    <string name="title_activity_home">HomeActivity</string>
 </resources>

@@ -57,6 +57,7 @@ dependencies {
 
     // modules
     implementation(project(":feature:auth"))
+    implementation(project(":feature:home"))
 
     // splash screen
     implementation(libs.splashscreen)
@@ -72,6 +73,8 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(platform(libs.compose.bom))
     implementation(platform(libs.compose.bom))
+    implementation(platform(libs.compose.bom))
+    androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(platform(libs.compose.bom))

@@ -35,7 +35,8 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
-    viewModel: AuthViewModel
+    viewModel: AuthViewModel,
+    goToHomeScreen: () -> Unit
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
@@ -98,6 +99,10 @@ fun LoginScreen(
                 )
             }
         }
+    }
+
+    if (uiState.success != null) {
+        goToHomeScreen()
     }
 }
 
