@@ -55,9 +55,15 @@ android {
 //noinspection KaptUsageInsteadOfKsp
 dependencies {
 
-    // modules
+    // features
     implementation(project(":feature:auth"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:categories"))
+    implementation(project(":feature:exchange"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:items"))
+    implementation(project(":feature:purchases"))
+    implementation(project(":feature:unity"))
 
     // splash screen
     implementation(libs.splashscreen)
