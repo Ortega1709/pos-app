@@ -14,6 +14,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -23,7 +26,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
         }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -44,6 +49,13 @@ dependencies {
 
     api(project(":core:design"))
     implementation(project(":core:data"))
+
+    implementation(project(":feature:items"))
+    implementation(project(":feature:categories"))
+    implementation(project(":feature:exchange"))
+    implementation(project(":feature:items"))
+    implementation(project(":feature:purchases"))
+    implementation(project(":feature:unity"))
 
     // hilt
     implementation(libs.hilt.android)

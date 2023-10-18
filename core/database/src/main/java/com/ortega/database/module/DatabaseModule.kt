@@ -16,11 +16,16 @@ object DatabaseModule {
 
     @Provides
     fun providePosDb(@ApplicationContext context: Context): PosDb {
-        return Room.databaseBuilder(
-            context = context,
-            klass = PosDb::class.java,
-            name = "pos.db"
-        ).build()
+
+        val db by lazy {
+            Room.databaseBuilder(
+                context = context,
+                klass = PosDb::class.java,
+                name = "pos.db"
+            ).build()
+        }
+
+        return db
     }
 
     @Provides

@@ -135,10 +135,9 @@ fun MainScreen(navController: NavHostController) {
                             )
                         },
                         onClick = {
+                            navController.navigate(screens[index].route)
                             coroutineScope.launch { drawerState.close() }
                             selectedItem = index
-                            navController.popBackStack()
-                            navController.navigate(screens[index].route)
                         }
                     )
                 }
