@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Category
 import androidx.compose.material.icons.rounded.Inventory2
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Payments
@@ -96,48 +95,6 @@ fun HomeScreen(onOpenDrawer: () -> Unit) {
                         image = Icons.Rounded.Straighten,
                         title = "0",
                         subtitle = stringResource(id = com.ortega.unity.R.string.unity)
-                    )
-
-                    Item(
-                        image = Icons.Rounded.Category,
-                        title = "45",
-                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
-                    )
-
-                    Item(
-                        image = Icons.Rounded.Category,
-                        title = "45",
-                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
-                    )
-
-                    Item(
-                        image = Icons.Rounded.Category,
-                        title = "45",
-                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
-                    )
-
-                    Item(
-                        image = Icons.Rounded.Category,
-                        title = "45",
-                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
-                    )
-
-                    Item(
-                        image = Icons.Rounded.Category,
-                        title = "45",
-                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
-                    )
-
-                    Item(
-                        image = Icons.Rounded.Category,
-                        title = "45",
-                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
-                    )
-
-                    Item(
-                        image = Icons.Rounded.Category,
-                        title = "45",
-                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
                     )
 
                 }

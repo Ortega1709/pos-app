@@ -117,26 +117,29 @@ fun MainScreen(navController: NavHostController) {
             ) {
 
                 HeaderImageComponent()
-                items.forEachIndexed { index, item ->
+                screens.forEach { screen ->
                     NavigationDrawerItem(
                         colors = NavigationDrawerItemDefaults.colors(
                             selectedContainerColor = DarkGray,
                             unselectedContainerColor = Black
                         ),
-                        label = { TextComponent(text = item.title, color = White) },
+                        label = { TextComponent(text = "", color = White) },
                         selected = currentDestination?.hierarchy?.any { destination ->
-                            destination.route == screens[index].route
+                            destination.route == screen.route
                         } == true,
                         icon = {
                             Icon(
                                 tint = White,
-                                imageVector = item.icon,
+                                imageVector = screen.icon,
                                 contentDescription = null
                             )
                         },
                         onClick = {
-                            navController.navigate(screens[index].route)
-                            coroutineScope.launch { drawerState.close() }
+                            coroutineScope.launch {
+                                drawerState.close()
+                            }
+                            navController.popBackStack()
+                            navController.navigate(screen.route)
                         }
                     )
                 }

@@ -25,7 +25,7 @@ fun MainNavigation(
         }
 
         composable(route = MainScreens.Items.route) {
-            ItemsScreen()
+            ItemsScreen(onOpenDrawer = onOpenDrawer)
         }
 
         composable(route = MainScreens.Purchases.route) {
