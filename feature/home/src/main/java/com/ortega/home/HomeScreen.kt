@@ -12,11 +12,15 @@ import androidx.compose.material.icons.rounded.Payments
 import androidx.compose.material.icons.rounded.PointOfSale
 import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material.icons.rounded.Straighten
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import com.ortega.design.common.HeightSpacer
 import com.ortega.design.common.Item
@@ -24,18 +28,23 @@ import com.ortega.design.common.TopBarComponent
 import com.ortega.design.theme.Padding
 import com.ortega.design.theme.White
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onOpenDrawer: () -> Unit) {
+
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+    
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         Scaffold(
+            modifier = Modifier
+                .nestedScroll(scrollBehavior.nestedScrollConnection)
+                .fillMaxSize(),
             topBar = {
                 TopBarComponent(
                     navigationIcon = {
-                        IconButton(
-                            onClick = { /*TODO*/ }
-                        ) {
+                        IconButton(onClick = onOpenDrawer) {
                             Icon(
                                 tint = White,
                                 imageVector = Icons.Rounded.Menu,
@@ -44,10 +53,10 @@ fun HomeScreen() {
                         }
                     },
                     actions = {},
-                    title = stringResource(id = R.string.dashboard)
+                    title = stringResource(id = R.string.dashboard),
+                    scrollBehavior = scrollBehavior
                 )
-            },
-            modifier = Modifier.fillMaxSize(),
+            }
         ) { paddingValues ->
             LazyColumn(
                 modifier = Modifier
@@ -87,6 +96,42 @@ fun HomeScreen() {
                         image = Icons.Rounded.Straighten,
                         title = "0",
                         subtitle = stringResource(id = com.ortega.unity.R.string.unity)
+                    )
+
+                    Item(
+                        image = Icons.Rounded.Category,
+                        title = "45",
+                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
+                    )
+
+                    Item(
+                        image = Icons.Rounded.Category,
+                        title = "45",
+                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
+                    )
+
+                    Item(
+                        image = Icons.Rounded.Category,
+                        title = "45",
+                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
+                    )
+
+                    Item(
+                        image = Icons.Rounded.Category,
+                        title = "45",
+                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
+                    )
+
+                    Item(
+                        image = Icons.Rounded.Category,
+                        title = "45",
+                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
+                    )
+
+                    Item(
+                        image = Icons.Rounded.Category,
+                        title = "45",
+                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
                     )
 
                     Item(

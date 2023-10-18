@@ -3,14 +3,14 @@ package com.ortega.design.common
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MediumTopAppBar
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.ortega.design.theme.DarkGray
-import com.ortega.design.theme.Gray
 import com.ortega.design.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -18,13 +18,17 @@ import com.ortega.design.theme.White
 fun TopBarComponent(
     navigationIcon: @Composable () -> Unit,
     actions: @Composable RowScope.() -> Unit,
-    title: String
+    title: String,
+    scrollBehavior: TopAppBarScrollBehavior
 ) {
+
+
     Column (
         modifier = Modifier.fillMaxWidth()
     ) {
 
-        CenterAlignedTopAppBar(
+        MediumTopAppBar(
+            scrollBehavior = scrollBehavior,
             navigationIcon = navigationIcon,
             title = {
                 TextComponent(

@@ -11,12 +11,11 @@ import androidx.compose.material.icons.rounded.Category
 import androidx.compose.material.icons.rounded.CurrencyExchange
 import androidx.compose.material.icons.rounded.Dashboard
 import androidx.compose.material.icons.rounded.Inventory2
-import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material.icons.rounded.Straighten
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
@@ -27,18 +26,16 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ortega.design.auth.HeaderImageComponent
 import com.ortega.design.common.TextComponent
-import com.ortega.design.common.TopBarComponent
 import com.ortega.design.theme.Black
 import com.ortega.design.theme.DarkGray
 import com.ortega.design.theme.PosAppTheme
@@ -64,6 +61,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen(navController: NavHostController) {
@@ -79,7 +77,6 @@ fun MainScreen(navController: NavHostController) {
         MainScreens.Exchange,
         MainScreens.Unity
     )
-
     val items = listOf(
         NavigationItem(
             title = stringResource(id = com.ortega.home.R.string.dashboard),
@@ -107,7 +104,8 @@ fun MainScreen(navController: NavHostController) {
         )
     )
 
-    var selectedItem by rememberSaveable { mutableIntStateOf(0) }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -126,7 +124,9 @@ fun MainScreen(navController: NavHostController) {
                             unselectedContainerColor = Black
                         ),
                         label = { TextComponent(text = item.title, color = White) },
-                        selected = selectedItem == index,
+                        selected = currentDestination?.hierarchy?.any { destination ->
+                            destination.route == screens[index].route
+                        } == true,
                         icon = {
                             Icon(
                                 tint = White,
@@ -137,7 +137,6 @@ fun MainScreen(navController: NavHostController) {
                         onClick = {
                             navController.navigate(screens[index].route)
                             coroutineScope.launch { drawerState.close() }
-                            selectedItem = index
                         }
                     )
                 }
@@ -147,24 +146,13 @@ fun MainScreen(navController: NavHostController) {
     ) {
 
         Scaffold(
-            modifier = Modifier.fillMaxSize(),
-            topBar = {
-                TopBarComponent(
-                    navigationIcon = {
-                        IconButton(onClick = { coroutineScope.launch { drawerState.open() } }) {
-                            Icon(
-                                tint = White,
-                                imageVector = Icons.Rounded.Menu,
-                                contentDescription = "Menu"
-                            )
-                        }
-                    },
-                    actions = {},
-                    title = items[selectedItem].title
-                )
-            }
+            modifier = Modifier
+                .fillMaxSize(),
         ) {
-            MainNavigation(navController = navController)
+            MainNavigation(
+                navController = navController,
+                onOpenDrawer = { coroutineScope.launch { drawerState.open() } }
+            )
         }
     }
 }

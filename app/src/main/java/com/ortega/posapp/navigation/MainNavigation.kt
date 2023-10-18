@@ -13,12 +13,15 @@ import com.ortega.unity.UnityScreen
 
 
 @Composable
-fun MainNavigation(navController: NavHostController) {
+fun MainNavigation(
+    navController: NavHostController,
+    onOpenDrawer: () -> Unit
+) {
 
     NavHost(navController = navController, startDestination = MainScreens.Home.route) {
 
         composable(route = MainScreens.Home.route) {
-            HomeScreen()
+            HomeScreen(onOpenDrawer = onOpenDrawer)
         }
 
         composable(route = MainScreens.Items.route) {
