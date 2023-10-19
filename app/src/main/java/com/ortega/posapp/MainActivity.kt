@@ -6,15 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Category
-import androidx.compose.material.icons.rounded.CurrencyExchange
-import androidx.compose.material.icons.rounded.Dashboard
-import androidx.compose.material.icons.rounded.Inventory2
-import androidx.compose.material.icons.rounded.ShoppingCart
-import androidx.compose.material.icons.rounded.Straighten
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
@@ -42,7 +34,7 @@ import com.ortega.design.theme.PosAppTheme
 import com.ortega.design.theme.White
 import com.ortega.posapp.navigation.MainNavigation
 import com.ortega.posapp.navigation.MainScreens
-import com.ortega.posapp.navigation.NavigationItem
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -61,12 +53,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen(navController: NavHostController) {
 
-    val coroutineScope = rememberCoroutineScope()
+    val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
     val screens = listOf(
@@ -77,31 +68,14 @@ fun MainScreen(navController: NavHostController) {
         MainScreens.Exchange,
         MainScreens.Unity
     )
+
     val items = listOf(
-        NavigationItem(
-            title = stringResource(id = com.ortega.home.R.string.dashboard),
-            icon = Icons.Rounded.Dashboard
-        ),
-        NavigationItem(
-            title = stringResource(com.ortega.items.R.string.articles),
-            icon = Icons.Rounded.Inventory2
-        ),
-        NavigationItem(
-            title = stringResource(com.ortega.purchases.R.string.achats),
-            icon = Icons.Rounded.ShoppingCart
-        ),
-        NavigationItem(
-            title = stringResource(com.ortega.categories.R.string.category),
-            icon = Icons.Rounded.Category
-        ),
-        NavigationItem(
-            title = stringResource(com.ortega.exchange.R.string.exchange),
-            icon = Icons.Rounded.CurrencyExchange
-        ),
-        NavigationItem(
-            title = stringResource(com.ortega.unity.R.string.unity),
-            icon = Icons.Rounded.Straighten
-        )
+        stringResource(id = com.ortega.home.R.string.dashboard),
+        stringResource(com.ortega.items.R.string.articles),
+        stringResource(com.ortega.purchases.R.string.achats),
+        stringResource(com.ortega.categories.R.string.category),
+        stringResource(com.ortega.exchange.R.string.exchange),
+        stringResource(com.ortega.unity.R.string.unity)
     )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -117,16 +91,18 @@ fun MainScreen(navController: NavHostController) {
             ) {
 
                 HeaderImageComponent()
-                screens.forEach { screen ->
+                screens.forEachIndexed { index, screen ->
                     NavigationDrawerItem(
                         colors = NavigationDrawerItemDefaults.colors(
                             selectedContainerColor = DarkGray,
                             unselectedContainerColor = Black
                         ),
-                        label = { TextComponent(text = "", color = White) },
-                        selected = currentDestination?.hierarchy?.any { destination ->
-                            destination.route == screen.route
-                        } == true,
+                        label = { TextComponent(text = items[index], color = White) },
+                        selected = currentDestination
+                            ?.hierarchy
+                            ?.any { destination ->
+                                destination.route == screen.route
+                            } == true,
                         icon = {
                             Icon(
                                 tint = White,
@@ -135,26 +111,28 @@ fun MainScreen(navController: NavHostController) {
                             )
                         },
                         onClick = {
-                            coroutineScope.launch {
+                            scope.launch {
                                 drawerState.close()
                             }
-                            navController.popBackStack()
-                            navController.navigate(screen.route)
+
+                            scope.launch {
+                                delay(200)
+                                navController.popBackStack()
+                                navController.navigate(screen.route)
+                            }
                         }
                     )
                 }
-
             }
         }
     ) {
 
         Scaffold(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
         ) {
             MainNavigation(
                 navController = navController,
-                onOpenDrawer = { coroutineScope.launch { drawerState.open() } }
+                drawerState = drawerState
             )
         }
     }

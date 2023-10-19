@@ -1,5 +1,6 @@
 package com.ortega.posapp.navigation
 
+import androidx.compose.material3.DrawerState
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -15,17 +16,17 @@ import com.ortega.unity.UnityScreen
 @Composable
 fun MainNavigation(
     navController: NavHostController,
-    onOpenDrawer: () -> Unit
+    drawerState: DrawerState
 ) {
 
     NavHost(navController = navController, startDestination = MainScreens.Home.route) {
 
         composable(route = MainScreens.Home.route) {
-            HomeScreen(onOpenDrawer = onOpenDrawer)
+            HomeScreen(drawerState = drawerState)
         }
 
         composable(route = MainScreens.Items.route) {
-            ItemsScreen(onOpenDrawer = onOpenDrawer)
+            ItemsScreen(drawerState = drawerState)
         }
 
         composable(route = MainScreens.Purchases.route) {
