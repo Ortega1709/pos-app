@@ -42,7 +42,7 @@ fun MainNavigation(
         }
 
         composable(route = MainScreens.Exchange.route) {
-            ExchangeScreen()
+            ExchangeScreen(drawerState = drawerState)
         }
 
         composable(route = MainScreens.Unity.route) {

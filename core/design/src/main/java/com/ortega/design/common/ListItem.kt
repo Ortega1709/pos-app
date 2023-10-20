@@ -54,3 +54,23 @@ fun Item(
     )
 
 }
+
+@Composable
+fun Item(
+    title: String,
+    subtitle: String,
+    trailing: @Composable (() -> Unit)
+) {
+
+    ListItem(
+        colors = listItemColorsComponent(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = Padding, end = Padding, top = Padding / 2)
+            .border(width = 1.dp, color = DarkGray, shape = RoundedCornerShape(Padding)),
+        headlineContent = { TextComponent(text = title, color = White) },
+        supportingContent = { TextComponent(text = subtitle, color = Gray) },
+        trailingContent = trailing
+    )
+
+}
