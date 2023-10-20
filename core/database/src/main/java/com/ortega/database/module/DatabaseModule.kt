@@ -3,6 +3,7 @@ package com.ortega.database.module
 import android.content.Context
 import androidx.room.Room
 import com.ortega.database.PosDb
+import com.ortega.database.dao.CategoryDao
 import com.ortega.database.dao.UnitDao
 import com.ortega.database.dao.UserDao
 import dagger.Module
@@ -37,6 +38,11 @@ object DatabaseModule {
     @Provides
     fun provideUnitDao(posDb: PosDb): UnitDao {
         return posDb.unitDao()
+    }
+
+    @Provides
+    fun provideCategoryDao(posDb: PosDb): CategoryDao {
+        return posDb.categoryDao()
     }
 
 }
