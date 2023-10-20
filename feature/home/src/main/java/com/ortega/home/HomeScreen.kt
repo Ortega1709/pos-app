@@ -1,5 +1,6 @@
 package com.ortega.home
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,10 +20,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.ortega.design.common.HeightSpacer
 import com.ortega.design.common.Item
 import com.ortega.design.common.TopBarComponent
@@ -32,7 +35,16 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(drawerState: DrawerState) {
+fun HomeScreen(
+    drawerState: DrawerState,
+    viewModel: HomeViewModel
+) {
+
+    val unitLazyPagingItems = viewModel.unitPaged.collectAsLazyPagingItems()
+    Log.d("TAG", unitLazyPagingItems.itemCount.toString())
+
+    val state = viewModel.state.collectAsState()
+    Log.d("UNITS", state.value.toString())
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val scope = rememberCoroutineScope()

@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    kotlin("kapt")
 }
 
 android {
@@ -34,6 +35,14 @@ android {
 }
 
 dependencies {
+
+    api(libs.room.android)
+    api(libs.room.ktx)
+    api(libs.room.paging)
+    kapt(libs.room.compiler)
+
+    api(libs.paging.compose)
+    api(libs.paging.runtime)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

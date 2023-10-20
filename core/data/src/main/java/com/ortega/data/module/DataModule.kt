@@ -1,6 +1,8 @@
 package com.ortega.data.module
 
+import com.ortega.data.repository.UnitRepositoryImpl
 import com.ortega.data.repository.UserRepositoryImpl
+import com.ortega.database.dao.UnitDao
 import com.ortega.database.dao.UserDao
 import com.ortega.preferences.UserPreferences
 import dagger.Module
@@ -19,6 +21,15 @@ object DataModule {
     ): UserRepositoryImpl {
 
         return UserRepositoryImpl(userDao = userDao, userPreferences = userPreferences)
+
+    }
+
+    @Provides
+    fun provideUnitRepositoryImpl(
+        unitDao: UnitDao,
+    ): UnitRepositoryImpl {
+
+        return UnitRepositoryImpl(unitDao = unitDao)
 
     }
 

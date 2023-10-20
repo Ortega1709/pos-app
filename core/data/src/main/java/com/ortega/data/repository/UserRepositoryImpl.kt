@@ -1,16 +1,11 @@
 package com.ortega.data.repository
 
-import android.util.Log
-import androidx.annotation.WorkerThread
 import com.ortega.database.dao.UserDao
-import com.ortega.database.entity.mapper.UserEntityMapper
+import com.ortega.database.entity.mapper.toEntity
 import com.ortega.domain.model.User
 import com.ortega.domain.repository.UserRepository
 import com.ortega.preferences.UserPreferences
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
@@ -22,7 +17,7 @@ class UserRepositoryImpl @Inject constructor(
 
     override fun insertUser(user: User) = flow {
 
-        userDao.insertUser(userEntity = UserEntityMapper.toEntity(user))
+        userDao.insertUser(userEntity = user.toEntity())
         emit(user)
 
     }.flowOn(Dispatchers.IO)

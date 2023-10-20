@@ -34,9 +34,11 @@ import com.ortega.design.theme.PosAppTheme
 import com.ortega.design.theme.White
 import com.ortega.posapp.navigation.MainNavigation
 import com.ortega.posapp.navigation.MainScreens
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +72,7 @@ fun MainScreen(navController: NavHostController) {
     )
 
     val items = listOf(
-        stringResource(id = com.ortega.home.R.string.dashboard),
+        stringResource(com.ortega.home.R.string.dashboard),
         stringResource(com.ortega.items.R.string.articles),
         stringResource(com.ortega.purchases.R.string.achats),
         stringResource(com.ortega.categories.R.string.category),

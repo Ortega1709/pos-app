@@ -2,12 +2,14 @@ package com.ortega.posapp.navigation
 
 import androidx.compose.material3.DrawerState
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.ortega.categories.CategoriesScreen
 import com.ortega.exchange.ExchangeScreen
 import com.ortega.home.HomeScreen
+import com.ortega.home.HomeViewModel
 import com.ortega.items.ItemsScreen
 import com.ortega.purchases.PurchasesScreen
 import com.ortega.unity.UnityScreen
@@ -19,10 +21,12 @@ fun MainNavigation(
     drawerState: DrawerState
 ) {
 
+    val homeViewModel: HomeViewModel = hiltViewModel()
+
     NavHost(navController = navController, startDestination = MainScreens.Home.route) {
 
         composable(route = MainScreens.Home.route) {
-            HomeScreen(drawerState = drawerState)
+            HomeScreen(drawerState = drawerState, viewModel = homeViewModel)
         }
 
         composable(route = MainScreens.Items.route) {
