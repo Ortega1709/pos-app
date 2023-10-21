@@ -1,6 +1,5 @@
 package com.ortega.auth
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -11,8 +10,6 @@ import com.ortega.domain.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,22 +24,24 @@ class AuthViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     fun userAuthentication(password: String) {
-        _uiState.update { state -> state.copy(isLoading = true) }
 
         viewModelScope.launch {
-            userRepositoryImpl.userAuthentication(password).collectLatest {
-                _uiState.update { state -> state.copy(isLoading = false) }
+            _uiState.emit(AuthUiState(isLoading = true))
+
+            userRepositoryImpl.userAuthentication(password).collect {
+                _uiState.emit(AuthUiState(isLoading = true))
             }
         }
 
     }
 
     fun insertUser(user: User) {
-        _uiState.update { state -> state.copy(isLoading = true) }
 
         viewModelScope.launch {
-            userRepositoryImpl.insertUser(user).collectLatest {
-                _uiState.update { state -> state.copy(isLoading = false, success = user) }
+            _uiState.emit(AuthUiState(isLoading = true))
+
+            userRepositoryImpl.insertUser(user).collect {
+                _uiState.emit(AuthUiState(isLoading = true, success = user))
             }
         }
     }
@@ -50,7 +49,7 @@ class AuthViewModel @Inject constructor(
     fun alreadyAuthenticated(): Boolean {
 
         viewModelScope.launch {
-            userRepositoryImpl.getUserPassword().collectLatest {
+            userRepositoryImpl.getUserPassword().collect {
                 _userPassword = it != ""
             }
         }

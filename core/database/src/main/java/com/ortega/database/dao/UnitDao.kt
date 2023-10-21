@@ -14,13 +14,13 @@ interface UnitDao {
     fun allUnitsPaged(): PagingSource<Int, UnitEntity>
 
     @Insert
-    fun insertUnit(unitEntity: UnitEntity)
+    suspend fun insertUnit(unitEntity: UnitEntity)
 
     @Query("SELECT COUNT(*) FROM unit")
-    fun countAllUnits(): Int
+    suspend fun countAllUnits(): Int
 
     @Delete
-    fun deleteUnit(unitEntity: UnitEntity)
+    suspend fun deleteUnit(unitEntity: UnitEntity)
 
 
 }

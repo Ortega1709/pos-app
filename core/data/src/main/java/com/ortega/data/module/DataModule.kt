@@ -1,9 +1,11 @@
 package com.ortega.data.module
 
 import com.ortega.data.repository.CategoryRepositoryImpl
+import com.ortega.data.repository.RateRepositoryImpl
 import com.ortega.data.repository.UnitRepositoryImpl
 import com.ortega.data.repository.UserRepositoryImpl
 import com.ortega.database.dao.CategoryDao
+import com.ortega.database.dao.RateDao
 import com.ortega.database.dao.UnitDao
 import com.ortega.database.dao.UserDao
 import com.ortega.preferences.UserPreferences
@@ -44,4 +46,12 @@ object DataModule {
 
     }
 
+    @Provides
+    fun provideRateRepositoryImpl(
+        rateDao: RateDao
+    ): RateRepositoryImpl {
+
+        return RateRepositoryImpl(rateDao = rateDao)
+
+    }
 }

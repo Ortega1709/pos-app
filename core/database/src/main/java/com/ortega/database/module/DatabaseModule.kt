@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.ortega.database.PosDb
 import com.ortega.database.dao.CategoryDao
+import com.ortega.database.dao.RateDao
 import com.ortega.database.dao.UnitDao
 import com.ortega.database.dao.UserDao
 import dagger.Module
@@ -43,6 +44,11 @@ object DatabaseModule {
     @Provides
     fun provideCategoryDao(posDb: PosDb): CategoryDao {
         return posDb.categoryDao()
+    }
+
+    @Provides
+    fun provideRateDao(posDb: PosDb): RateDao {
+        return posDb.rateDao()
     }
 
 }

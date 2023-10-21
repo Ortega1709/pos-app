@@ -40,8 +40,7 @@ class CategoryRepositoryImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
 
     override fun countAllCategories() = flow {
-        val categories = categoryDao.countAllCategories()
-        emit(categories)
+        emit(categoryDao.countAllCategories())
     }.flowOn(Dispatchers.IO)
 
     override fun deleteCategory(category: Category) = flow {

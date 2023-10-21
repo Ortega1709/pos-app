@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="exchange">Taux de change</string>
+    <string name="insert_own_exchange">Insérer votre taux de change</string>
+    <string name="actual_exchange">Taux actuel</string>
 </resources>
