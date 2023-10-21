@@ -2,7 +2,7 @@ package com.ortega.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import androidx.room.Update
+import androidx.room.Upsert
 import com.ortega.database.entity.RateEntity
 import com.ortega.domain.model.Rate
 
@@ -10,9 +10,9 @@ import com.ortega.domain.model.Rate
 interface RateDao {
 
     @Query("SELECT * FROM rate")
-    suspend fun getRate(): Rate
+    suspend fun getRate(): Rate?
 
-    @Update
+    @Upsert
     suspend fun updateRate(rateEntity: RateEntity)
 
 

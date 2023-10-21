@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface RateRepository {
 
-    fun getRate(): Flow<Rate>
+    fun getRate(): Flow<Rate?>
 
     fun updateRate(rate: Rate): Flow<Rate>
 

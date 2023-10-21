@@ -17,12 +17,17 @@ class ExchangeViewModel @Inject constructor(
     private val _state = MutableStateFlow(ExchangeUiState())
     val state = _state.asStateFlow()
 
+    init {
+        getRate()
+    }
+
     fun getRate() {
         viewModelScope.launch {
-            rateRepositoryImpl.getRate().collect {
-                _state.emit(ExchangeUiState(rate = it))
+            rateRepositoryImpl.getRate().collect { rate ->
+               rate?.let {
+                   _state.emit(ExchangeUiState(rate = it))
+               }
             }
         }
     }
-
 }
