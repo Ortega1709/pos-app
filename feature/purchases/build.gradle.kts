@@ -50,6 +50,8 @@ dependencies {
     implementation(libs.hilt.navigation)
     kapt(libs.hilt.compiler)
 
+    implementation(libs.lifecycle.runtime.compose)
+
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
