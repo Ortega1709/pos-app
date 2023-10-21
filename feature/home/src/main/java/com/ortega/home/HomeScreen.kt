@@ -44,7 +44,7 @@ fun HomeScreen(
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val scope = rememberCoroutineScope()
-    
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -119,5 +119,4 @@ fun HomeScreen(
             }
         }
     }
-
 }

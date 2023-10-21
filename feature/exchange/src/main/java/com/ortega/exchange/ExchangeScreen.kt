@@ -63,7 +63,7 @@ fun ExchangeScreen(
                     title = stringResource(id = R.string.exchange),
                     scrollBehavior = scrollBehavior
                 )
-            }
+            },
         ) { paddingValues ->
             LazyColumn(
                 modifier = Modifier.padding(paddingValues)
@@ -82,7 +82,9 @@ fun ExchangeScreen(
                                 color = White
                             )
                         }
-                    )
+                    ) {
+
+                    }
                 }
             }
         }

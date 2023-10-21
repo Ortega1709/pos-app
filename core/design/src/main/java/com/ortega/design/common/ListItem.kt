@@ -1,6 +1,7 @@
 package com.ortega.design.common
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -59,7 +60,8 @@ fun Item(
 fun Item(
     title: String,
     subtitle: String,
-    trailing: @Composable (() -> Unit)
+    trailing: @Composable (() -> Unit),
+    onClickItem: () -> Unit
 ) {
 
     ListItem(
@@ -67,6 +69,7 @@ fun Item(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = Padding, end = Padding, top = Padding / 2)
+            .clickable { onClickItem() }
             .border(width = 1.dp, color = DarkGray, shape = RoundedCornerShape(Padding)),
         headlineContent = { TextComponent(text = title, color = White) },
         supportingContent = { TextComponent(text = subtitle, color = Gray) },
