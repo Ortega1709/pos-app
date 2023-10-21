@@ -3,4 +3,7 @@
     <string name="exchange">Taux de change</string>
     <string name="insert_own_exchange">Insérer votre taux de change</string>
     <string name="actual_exchange">Taux actuel</string>
-</resources>
+    <string name="update_rate_of_exchange">Modifier le taux de change</string>
+    <string name="modify">Modifier</string>
+    <string name="modify">Modifier</string>
+    $</resources>

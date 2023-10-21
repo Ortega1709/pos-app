@@ -14,15 +14,23 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ortega.design.common.DialogComponent
 import com.ortega.design.common.HeightSpacer
 import com.ortega.design.common.Item
 import com.ortega.design.common.TextComponent
+import com.ortega.design.common.TextFieldComponent
 import com.ortega.design.common.TopBarComponent
 import com.ortega.design.theme.Padding
 import com.ortega.design.theme.White
@@ -39,6 +47,9 @@ fun ExchangeScreen(
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val scope = rememberCoroutineScope()
+
+    var showDialog by remember { mutableStateOf(false) }
+    var rateTextField by rememberSaveable { mutableStateOf(state.value.rate.rate.toString()) }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -81,12 +92,29 @@ fun ExchangeScreen(
                                 text = state.value.rate.rate.toString(),
                                 color = White
                             )
-                        }
-                    ) {
-
-                    }
+                        },
+                        onClickItem = { showDialog = true }
+                    )
                 }
             }
         }
+    }
+
+
+    if (showDialog) {
+        DialogComponent(
+            title = stringResource(R.string.update_rate_of_exchange),
+            titleButton = stringResource(R.string.modify),
+            setShowDialog = { showDialog = it },
+            content = {
+                TextFieldComponent(
+                    placeholder = "Taux",
+                    textField = rateTextField,
+                    keyboardType = KeyboardType.Number,
+                    onValueChange = { rateTextField = it }
+                )
+            },
+            onClick = {}
+        )
     }
 }
