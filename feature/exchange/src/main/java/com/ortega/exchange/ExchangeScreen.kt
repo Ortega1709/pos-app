@@ -35,6 +35,7 @@ import com.ortega.design.common.TopBarComponent
 import com.ortega.design.theme.Padding
 import com.ortega.design.theme.White
 import com.ortega.domain.model.Rate
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -119,7 +120,8 @@ fun ExchangeScreen(
                 )
             },
             onClick = {
-                viewModel.updateRate(rate = Rate(rateId = null, rate = rateTextField.toInt()))
+                viewModel.insertRate(rate = Rate(rateId = null, rate = rateTextField.toInt()))
+                scope.launch { delay(2000) }
                 showDialog = false
             }
         )

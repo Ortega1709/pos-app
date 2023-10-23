@@ -21,9 +21,4 @@ class RateRepositoryImpl @Inject constructor(
         emit(rate)
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun deleteRate() {
-        rateDao.deleteAllRates()
-    }
-
-
 }

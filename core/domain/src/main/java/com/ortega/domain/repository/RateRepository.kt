@@ -9,6 +9,4 @@ interface RateRepository {
 
     fun insertRate(rate: Rate): Flow<Rate>
 
-    suspend fun deleteRate()
-
 }

@@ -33,10 +33,8 @@ class ExchangeViewModel @Inject constructor(
         }
     }
 
-    fun updateRate(rate: Rate) {
+    fun insertRate(rate: Rate) {
         viewModelScope.launch {
-            rateRepositoryImpl.deleteRate()
-
             rateRepositoryImpl.insertRate(rate).collect {
                 getRate()
             }
