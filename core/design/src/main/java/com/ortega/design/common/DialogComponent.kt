@@ -6,7 +6,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.Dialog
-import com.ortega.design.auth.HeaderTextComponent
 import com.ortega.design.theme.Padding
 
 @Composable
