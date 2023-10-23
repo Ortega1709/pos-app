@@ -13,8 +13,8 @@ import com.ortega.home.HomeScreen
 import com.ortega.home.HomeViewModel
 import com.ortega.items.ItemsScreen
 import com.ortega.purchases.PurchasesScreen
+import com.ortega.unity.UnitScreen
 import com.ortega.unity.UnitViewModel
-import com.ortega.unity.UnityScreen
 
 
 @Composable
@@ -50,7 +50,7 @@ fun MainNavigation(
         }
 
         composable(route = MainScreens.Unity.route) {
-            UnityScreen(drawerState = drawerState, viewModel = unitViewModel)
+            UnitScreen(drawerState = drawerState, viewModel = unitViewModel)
         }
 
     }

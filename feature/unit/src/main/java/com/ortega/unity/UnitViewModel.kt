@@ -12,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class UnitViewModel @Inject constructor(
     private val unitRepositoryImpl: UnitRepositoryImpl
-): ViewModel() {
+) : ViewModel() {
 
     val unitsPaged = unitRepositoryImpl.allUnitsPaged().cachedIn(viewModelScope)
 
@@ -25,6 +25,12 @@ class UnitViewModel @Inject constructor(
     fun updateUnit(unit: Unit) {
         viewModelScope.launch {
             unitRepositoryImpl.updateUnit(unit).collect {}
+        }
+    }
+
+    fun deleteUnit(unit: Unit) {
+        viewModelScope.launch {
+            unitRepositoryImpl.deleteUnit(unit).collect {}
         }
     }
 

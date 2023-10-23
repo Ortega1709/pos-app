@@ -3,4 +3,6 @@
     <string name="caisse">Caisse</string>
     <string name="visibility">Eye visibility</string>
     <string name="leading_icons">Leading icons</string>
+    <string name="back">Retour</string>
+    <string name="delete">Supprimer</string>
 </resources>

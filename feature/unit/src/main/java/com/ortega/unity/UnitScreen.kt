@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,6 +31,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import com.ortega.design.common.DialogComponent
+import com.ortega.design.common.HeaderTextComponent
 import com.ortega.design.common.HeightSpacer
 import com.ortega.design.common.Item
 import com.ortega.design.common.NothingScreenComponent
@@ -44,10 +46,13 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun UnityScreen(drawerState: DrawerState, viewModel: UnitViewModel) {
+fun UnitScreen(drawerState: DrawerState, viewModel: UnitViewModel) {
 
     val unitsLazyPagingItems = viewModel.unitsPaged.collectAsLazyPagingItems()
-    var showDialog by remember { mutableStateOf(false) }
+
+    var showInsertDialog by remember { mutableStateOf(false) }
+    var showDeleteDialog by remember { mutableStateOf(false) }
+    var unitDeleted by remember { mutableStateOf(Unit(unitId = null, name = "")) }
 
     var nameUnitField by rememberSaveable { mutableStateOf("") }
 
@@ -78,7 +83,7 @@ fun UnityScreen(drawerState: DrawerState, viewModel: UnitViewModel) {
             FloatingActionButton(
                 containerColor = Blue,
                 contentColor = White,
-                onClick = { showDialog = true }
+                onClick = { showInsertDialog = true }
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Add,
@@ -106,19 +111,36 @@ fun UnityScreen(drawerState: DrawerState, viewModel: UnitViewModel) {
                 ) {
 
                     unitsLazyPagingItems[it]?.let { unit ->
-                        Item(title = unit.name, trailing = { /*TODO*/ }, onClickItem = {})
+                        Item(
+                            title = unit.name,
+                            trailing = {
+                                IconButton(onClick = {
+                                    unitDeleted = unit
+                                    showDeleteDialog = true
+                                }) {
+                                    Icon(
+                                        imageVector = Icons.Rounded.Delete,
+                                        contentDescription = "Delete",
+                                        tint = White
+                                    )
+                                }
+                            },
+                            onClickItem = {}
+                        )
                     }
 
                 }
+                
+                item { HeightSpacer(height = Padding * 4) }
             }
         }
     }
 
-    if (showDialog) {
+    if (showInsertDialog) {
         DialogComponent(
             title = stringResource(R.string.add_new_unit),
             titleButton = stringResource(R.string.add_unit),
-            setShowDialog = { showDialog = it },
+            setShowDialog = { showInsertDialog = it },
             content = {
                 TextFieldComponent(
                     placeholder = stringResource(id = R.string.unity),
@@ -131,9 +153,25 @@ fun UnityScreen(drawerState: DrawerState, viewModel: UnitViewModel) {
             onClick = {
                 if (nameUnitField.isNotEmpty()) {
                     viewModel.insertUnit(unit = Unit(unitId = null, name = nameUnitField))
-                    showDialog = false
+                    showInsertDialog = false
                 }
             }
         )
     }
+
+    if (showDeleteDialog) {
+
+        DialogComponent(
+            title = stringResource(R.string.delete_unit),
+            setShowDialog = { showDeleteDialog = it },
+            content = {
+                HeaderTextComponent(text = stringResource(R.string.sure_delete_unit))
+            },
+            onClick = {
+               viewModel.deleteUnit(unitDeleted)
+                showDeleteDialog = false
+            }
+        )
+    }
+
 }

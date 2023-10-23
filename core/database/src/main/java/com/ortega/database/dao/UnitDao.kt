@@ -2,12 +2,12 @@ package com.ortega.database.dao
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.ortega.database.entity.UnitEntity
+import java.util.UUID
 
 @Dao
 interface UnitDao {
@@ -21,8 +21,8 @@ interface UnitDao {
     @Query("SELECT COUNT(*) FROM unit")
     suspend fun countAllUnits(): Int
 
-    @Delete
-    suspend fun deleteUnit(unitEntity: UnitEntity)
+    @Query("DELETE FROM unit WHERE unitId = :id")
+    suspend fun deleteUnit(id: UUID)
 
     @Update
     suspend fun updateUnit(unitEntity: UnitEntity)

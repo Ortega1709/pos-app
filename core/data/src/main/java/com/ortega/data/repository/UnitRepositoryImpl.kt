@@ -1,6 +1,5 @@
 package com.ortega.data.repository
 
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -24,7 +23,6 @@ class UnitRepositoryImpl @Inject constructor(
     override fun insertUnit(unit: Unit) = flow {
         unitDao.insertUnit(unitEntity = unit.toEntity())
         emit(unit)
-        Log.d("UNIT", unit.toString())
     }.flowOn(Dispatchers.IO)
 
     override fun allUnitsPaged() = Pager(
@@ -48,7 +46,7 @@ class UnitRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     override fun deleteUnit(unit: Unit) = flow {
-        unitDao.deleteUnit(unit.toEntity())
+        unit.unitId?.let { unitDao.deleteUnit(it) }
         emit(unit)
     }.flowOn(Dispatchers.IO)
 
