@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unity">Unités</string>
+    <string name="nothing_units">Aucune unité pour le monent</string>
+    <string name="add_unit">Ajouter</string>
+    <string name="add_new_unit">Ajouter une unité</string>
+</resources>

@@ -63,7 +63,7 @@ dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:items"))
     implementation(project(":feature:purchases"))
-    implementation(project(":feature:unity"))
+    implementation(project(":feature:unit"))
 
     // splash screen
     implementation(libs.splashscreen)

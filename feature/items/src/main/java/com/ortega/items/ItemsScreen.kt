@@ -1,6 +1,5 @@
 package com.ortega.items
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -31,39 +30,35 @@ fun ItemsScreen(drawerState: DrawerState) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val scope = rememberCoroutineScope()
 
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Scaffold(
+    Scaffold(
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection)
+            .fillMaxSize(),
+        topBar = {
+            TopBarComponent(
+                navigationIcon = {
+                    IconButton(onClick = { scope.launch { drawerState.open() } }) {
+                        Icon(
+                            tint = White,
+                            imageVector = Icons.Rounded.Menu,
+                            contentDescription = "Menu"
+                        )
+                    }
+                },
+                actions = {},
+                title = stringResource(id = R.string.articles),
+                scrollBehavior = scrollBehavior
+            )
+        }
+    ) { paddingValues ->
+        LazyColumn(
             modifier = Modifier
-                .nestedScroll(scrollBehavior.nestedScrollConnection)
-                .fillMaxSize(),
-            topBar = {
-                TopBarComponent(
-                    navigationIcon = {
-                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                            Icon(
-                                tint = White,
-                                imageVector = Icons.Rounded.Menu,
-                                contentDescription = "Menu"
-                            )
-                        }
-                    },
-                    actions = {},
-                    title = stringResource(id = R.string.articles),
-                    scrollBehavior = scrollBehavior
-                )
-            }
-        ) { paddingValues ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            ) {
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
 
-                item { HeightSpacer(height = Padding / 2) }
+            item { HeightSpacer(height = Padding / 2) }
 
-            }
         }
     }
 }

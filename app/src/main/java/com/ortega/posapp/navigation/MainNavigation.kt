@@ -13,6 +13,7 @@ import com.ortega.home.HomeScreen
 import com.ortega.home.HomeViewModel
 import com.ortega.items.ItemsScreen
 import com.ortega.purchases.PurchasesScreen
+import com.ortega.unity.UnitViewModel
 import com.ortega.unity.UnityScreen
 
 
@@ -24,6 +25,7 @@ fun MainNavigation(
 
     val homeViewModel: HomeViewModel = hiltViewModel()
     val exchangeViewModel: ExchangeViewModel = hiltViewModel()
+    val unitViewModel: UnitViewModel = hiltViewModel()
 
     NavHost(navController = navController, startDestination = MainScreens.Home.route) {
 
@@ -48,7 +50,7 @@ fun MainNavigation(
         }
 
         composable(route = MainScreens.Unity.route) {
-            UnityScreen()
+            UnityScreen(drawerState = drawerState, viewModel = unitViewModel)
         }
 
     }

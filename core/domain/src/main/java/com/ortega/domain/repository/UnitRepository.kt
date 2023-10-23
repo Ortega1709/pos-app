@@ -7,8 +7,13 @@ import kotlinx.coroutines.flow.Flow
 interface UnitRepository {
 
     fun insertUnit(unit: Unit): Flow<Unit>
+
     fun allUnitsPaged(): Flow<PagingData<Unit>>
+
     fun countAllUnits(): Flow<Int>
+
     fun deleteUnit(unit: Unit): Flow<Unit>
+
+    fun updateUnit(unit: Unit): Flow<Unit>
 
 }

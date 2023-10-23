@@ -26,8 +26,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ortega.auth.AuthViewModel
 import com.ortega.auth.R
 import com.ortega.design.auth.HeaderImageComponent
-import com.ortega.design.auth.HeaderTextComponent
 import com.ortega.design.common.ButtonComponent
+import com.ortega.design.common.HeaderTextComponent
 import com.ortega.design.common.HeightSpacer
 import com.ortega.design.common.PasswordFieldComponent
 import com.ortega.design.theme.Padding

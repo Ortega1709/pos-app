@@ -7,8 +7,11 @@ import kotlinx.coroutines.flow.Flow
 interface CategoryRepository {
 
     fun insertCategory(category: Category): Flow<Category>
+
     fun allCategoriesPaged(): Flow<PagingData<Category>>
+
     fun countAllCategories(): Flow<Int>
+
     fun deleteCategory(category: Category): Flow<Category>
 
 }

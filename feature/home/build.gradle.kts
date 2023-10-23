@@ -55,7 +55,7 @@ dependencies {
     implementation(project(":feature:exchange"))
     implementation(project(":feature:items"))
     implementation(project(":feature:purchases"))
-    implementation(project(":feature:unity"))
+    implementation(project(":feature:unit"))
 
     // hilt
     implementation(libs.hilt.android)

@@ -11,6 +11,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.ortega.design.R
+import com.ortega.design.theme.Gray
 
 @Composable
 fun NothingScreenComponent(text: String) {
@@ -22,11 +23,12 @@ fun NothingScreenComponent(text: String) {
     ) {
 
         Image(
-            modifier = Modifier.scale(.5f),
+            modifier = Modifier.scale(.8f),
             painter = painterResource(R.drawable.nothing),
             contentDescription = stringResource(R.string.caisse)
         )
-        HeaderTextComponent(text = text)
+
+        TextComponent(text = text, color = Gray)
 
     }
 

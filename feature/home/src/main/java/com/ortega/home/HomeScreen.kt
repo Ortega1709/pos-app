@@ -1,6 +1,5 @@
 package com.ortega.home
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -45,77 +44,73 @@ fun HomeScreen(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val scope = rememberCoroutineScope()
 
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Scaffold(
+    Scaffold(
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection)
+            .fillMaxSize(),
+        topBar = {
+            TopBarComponent(
+                navigationIcon = {
+                    IconButton(onClick = { scope.launch { drawerState.open() } }) {
+                        Icon(
+                            tint = White,
+                            imageVector = Icons.Rounded.Menu,
+                            contentDescription = "Menu"
+                        )
+                    }
+                },
+                actions = {},
+                title = stringResource(id = R.string.dashboard),
+                scrollBehavior = scrollBehavior
+            )
+        }
+    ) { paddingValues ->
+        LazyColumn(
             modifier = Modifier
-                .nestedScroll(scrollBehavior.nestedScrollConnection)
-                .fillMaxSize(),
-            topBar = {
-                TopBarComponent(
-                    navigationIcon = {
-                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                            Icon(
-                                tint = White,
-                                imageVector = Icons.Rounded.Menu,
-                                contentDescription = "Menu"
-                            )
-                        }
-                    },
-                    actions = {},
-                    title = stringResource(id = R.string.dashboard),
-                    scrollBehavior = scrollBehavior
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
+
+            item { HeightSpacer(height = Padding / 2) }
+
+            item {
+
+                Item(
+                    image = Icons.Rounded.PointOfSale,
+                    title = "0",
+                    subtitle = stringResource(id = R.string.caisse)
                 )
-            }
-        ) { paddingValues ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            ) {
 
-                item { HeightSpacer(height = Padding / 2) }
+                Item(
+                    image = Icons.Rounded.Payments,
+                    title = "0",
+                    subtitle = stringResource(id = R.string.ventes)
+                )
 
-                item {
+                Item(
+                    image = Icons.Rounded.ShoppingCart,
+                    title = "0",
+                    subtitle = stringResource(id = com.ortega.purchases.R.string.achats)
+                )
 
-                    Item(
-                        image = Icons.Rounded.PointOfSale,
-                        title = "0",
-                        subtitle = stringResource(id = R.string.caisse)
-                    )
+                Item(
+                    image = Icons.Rounded.Inventory2,
+                    title = "0",
+                    subtitle = stringResource(id = com.ortega.items.R.string.articles)
+                )
 
-                    Item(
-                        image = Icons.Rounded.Payments,
-                        title = "0",
-                        subtitle = stringResource(id = R.string.ventes)
-                    )
+                Item(
+                    image = Icons.Rounded.Straighten,
+                    title = state.value.units.toString(),
+                    subtitle = stringResource(id = com.ortega.unity.R.string.unity)
+                )
 
-                    Item(
-                        image = Icons.Rounded.ShoppingCart,
-                        title = "0",
-                        subtitle = stringResource(id = com.ortega.purchases.R.string.achats)
-                    )
+                Item(
+                    image = Icons.Rounded.Category,
+                    title = state.value.categories.toString(),
+                    subtitle = stringResource(id = com.ortega.categories.R.string.category)
+                )
 
-                    Item(
-                        image = Icons.Rounded.Inventory2,
-                        title = "0",
-                        subtitle = stringResource(id = com.ortega.items.R.string.articles)
-                    )
-
-                    Item(
-                        image = Icons.Rounded.Straighten,
-                        title = state.value.units.toString(),
-                        subtitle = stringResource(id = com.ortega.unity.R.string.unity)
-                    )
-
-                    Item(
-                        image = Icons.Rounded.Category,
-                        title = state.value.categories.toString(),
-                        subtitle = stringResource(id = com.ortega.categories.R.string.category)
-                    )
-
-                }
             }
         }
     }
