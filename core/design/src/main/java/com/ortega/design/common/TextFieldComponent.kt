@@ -113,6 +113,7 @@ fun PasswordFieldComponent(
 fun TextFieldComponent(
     placeholder: String,
     textField: String,
+    maxLines: Int,
     keyboardType: KeyboardType,
     onValueChange: (String) -> Unit
 ) {
@@ -123,6 +124,7 @@ fun TextFieldComponent(
             .fillMaxWidth()
             .padding(horizontal = Padding),
         shape = MaterialTheme.shapes.medium,
+        maxLines = maxLines,
         colors = colorsTextFieldComponent(),
         placeholder = {
             TextComponent(
