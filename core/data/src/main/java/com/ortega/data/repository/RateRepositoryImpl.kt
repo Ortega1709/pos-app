@@ -16,8 +16,14 @@ class RateRepositoryImpl @Inject constructor(
         emit(rateDao.getRate())
     }.flowOn(Dispatchers.IO)
 
-    override fun updateRate(rate: Rate) = flow {
-        rateDao.updateRate(rate.toEntity())
+    override fun insertRate(rate: Rate) = flow {
+        rateDao.insertRate(rate.toEntity())
         emit(rate)
     }.flowOn(Dispatchers.IO)
+
+    override suspend fun deleteRate() {
+        rateDao.deleteAllRates()
+    }
+
+
 }

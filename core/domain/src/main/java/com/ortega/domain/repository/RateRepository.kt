@@ -7,6 +7,8 @@ interface RateRepository {
 
     fun getRate(): Flow<Rate?>
 
-    fun updateRate(rate: Rate): Flow<Rate>
+    fun insertRate(rate: Rate): Flow<Rate>
+
+    suspend fun deleteRate()
 
 }

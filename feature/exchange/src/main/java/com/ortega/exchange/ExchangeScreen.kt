@@ -34,6 +34,7 @@ import com.ortega.design.common.TextFieldComponent
 import com.ortega.design.common.TopBarComponent
 import com.ortega.design.theme.Padding
 import com.ortega.design.theme.White
+import com.ortega.domain.model.Rate
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,13 +44,16 @@ fun ExchangeScreen(
     viewModel: ExchangeViewModel
 ) {
 
+
+
     val state = viewModel.state.collectAsStateWithLifecycle()
+
+    var showDialog by remember { mutableStateOf(false) }
+    var rateTextField by rememberSaveable { mutableStateOf(state.value.rate.rate.toString()) }
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val scope = rememberCoroutineScope()
 
-    var showDialog by remember { mutableStateOf(false) }
-    var rateTextField by rememberSaveable { mutableStateOf(state.value.rate.rate.toString()) }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -114,7 +118,10 @@ fun ExchangeScreen(
                     onValueChange = { rateTextField = it }
                 )
             },
-            onClick = {}
+            onClick = {
+                viewModel.updateRate(rate = Rate(rateId = null, rate = rateTextField.toInt()))
+                showDialog = false
+            }
         )
     }
 }

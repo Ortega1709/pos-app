@@ -3,6 +3,7 @@ package com.ortega.exchange
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ortega.data.repository.RateRepositoryImpl
+import com.ortega.domain.model.Rate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,12 +22,23 @@ class ExchangeViewModel @Inject constructor(
         getRate()
     }
 
-    fun getRate() {
+    private fun getRate() {
+
         viewModelScope.launch {
             rateRepositoryImpl.getRate().collect { rate ->
-               rate?.let {
-                   _state.emit(ExchangeUiState(rate = it))
-               }
+                rate?.let {
+                    _state.emit(ExchangeUiState(rate = it))
+                }
+            }
+        }
+    }
+
+    fun updateRate(rate: Rate) {
+        viewModelScope.launch {
+            rateRepositoryImpl.deleteRate()
+
+            rateRepositoryImpl.insertRate(rate).collect {
+                getRate()
             }
         }
     }
