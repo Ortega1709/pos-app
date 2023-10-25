@@ -6,4 +6,6 @@
     <string name="add_new_unit">Ajouter une unité</string>
     <string name="delete_unit">Supprimer une unité</string>
     <string name="sure_delete_unit">Voulez-vous vraiment supprimer cette unité ?</string>
+    <string name="modify">Modifier</string>
+    <string name="modify_unit">Modifier une unité</string>
 </resources>

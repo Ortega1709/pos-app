@@ -34,5 +34,4 @@ class UnitViewModel @Inject constructor(
         }
     }
 
-
 }

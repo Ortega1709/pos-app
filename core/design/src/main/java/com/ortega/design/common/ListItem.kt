@@ -82,7 +82,6 @@ fun Item(
 fun Item(
     title: String,
     trailing: @Composable (() -> Unit),
-    onClickItem: () -> Unit
 ) {
 
     ListItem(
@@ -90,7 +89,6 @@ fun Item(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = Padding, end = Padding, top = Padding / 2)
-            .clickable { onClickItem() }
             .border(width = 1.dp, color = DarkGray, shape = RoundedCornerShape(Padding)),
         headlineContent = { TextComponent(text = title, color = White) },
         trailingContent = trailing

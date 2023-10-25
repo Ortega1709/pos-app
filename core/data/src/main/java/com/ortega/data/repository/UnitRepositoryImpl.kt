@@ -51,13 +51,13 @@ class UnitRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     override fun updateUnit(unit: Unit) = flow {
-        unitDao.updateUnit(unit.toEntity())
+        unit.unitId?.let { unitDao.updateUnit(name = unit.name, unitId = unit.unitId!!) }
         emit(unit)
     }.flowOn(Dispatchers.IO)
 
     companion object {
         private const val PAGE_SIZE = 10
-        private const val PREFETCH_DISTANCE = 20
+        private const val PREFETCH_DISTANCE = 10
     }
 
 }

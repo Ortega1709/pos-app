@@ -5,13 +5,11 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import com.ortega.database.entity.UnitEntity
 import java.util.UUID
 
 @Dao
 interface UnitDao {
-
     @Query("SELECT * FROM unit")
     fun allUnitsPaged(): PagingSource<Int, UnitEntity>
 
@@ -24,8 +22,7 @@ interface UnitDao {
     @Query("DELETE FROM unit WHERE unitId = :id")
     suspend fun deleteUnit(id: UUID)
 
-    @Update
-    suspend fun updateUnit(unitEntity: UnitEntity)
-
+    @Query("UPDATE unit SET name = :name WHERE unitId = :unitId")
+    suspend fun updateUnit(name: String, unitId: UUID)
 
 }
