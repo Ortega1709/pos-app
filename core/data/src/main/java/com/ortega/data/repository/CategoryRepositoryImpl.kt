@@ -44,12 +44,17 @@ class CategoryRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     override fun deleteCategory(category: Category) = flow {
-        categoryDao.deleteCategory(category.toEntity())
+        category.categoryId?.let { categoryDao.deleteCategory(it) }
+        emit(category)
+    }.flowOn(Dispatchers.IO)
+
+    override fun updateCategory(category: Category) = flow {
+        category.categoryId?.let { categoryDao.updateCategory(name = category.name, categoryId = it) }
         emit(category)
     }.flowOn(Dispatchers.IO)
 
     companion object {
         private const val PAGE_SIZE = 10
-        private const val PREFETCH_DISTANCE = 20
+        private const val PREFETCH_DISTANCE = 10
     }
 }

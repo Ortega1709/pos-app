@@ -2,10 +2,10 @@ package com.ortega.database.dao
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.ortega.database.entity.CategoryEntity
+import java.util.UUID
 
 @Dao
 interface CategoryDao {
@@ -19,7 +19,10 @@ interface CategoryDao {
     @Query("SELECT COUNT(*) FROM category")
     fun countAllCategories(): Int
 
-    @Delete
-    fun deleteCategory(categoryEntity: CategoryEntity)
+    @Query("DELETE FROM category WHERE categoryId = :categoryId")
+    suspend fun deleteCategory(categoryId: UUID)
+
+    @Query("UPDATE category SET name = :name WHERE categoryId = :categoryId")
+    suspend fun updateCategory(name: String, categoryId: UUID)
 
 }

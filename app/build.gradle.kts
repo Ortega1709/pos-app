@@ -58,7 +58,7 @@ dependencies {
     // features
     implementation(project(":feature:auth"))
     implementation(project(":feature:home"))
-    implementation(project(":feature:categories"))
+    implementation(project(":feature:category"))
     implementation(project(":feature:exchange"))
     implementation(project(":feature:home"))
     implementation(project(":feature:items"))

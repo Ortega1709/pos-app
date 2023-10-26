@@ -45,7 +45,6 @@ fun ExchangeScreen(
 ) {
 
 
-
     val state = viewModel.state.collectAsStateWithLifecycle()
     var showDialog by remember { mutableStateOf(false) }
 
@@ -79,51 +78,52 @@ fun ExchangeScreen(
                     scrollBehavior = scrollBehavior
                 )
             },
-        ) { paddingValues ->
-            LazyColumn(
-                modifier = Modifier.padding(paddingValues)
-            ) {
+            content = { paddingValues ->
+                LazyColumn(
+                    modifier = Modifier.padding(paddingValues)
+                ) {
 
-                item { HeightSpacer(height = Padding / 2) }
+                    item { HeightSpacer(height = Padding / 2) }
 
-                item {
-                    Item(
-                        title = stringResource(R.string.actual_exchange),
-                        subtitle = stringResource(R.string.insert_own_exchange),
-                        trailing = {
-                            TextComponent(
-                                fontSize = 17.sp,
-                                text = state.value.rate.rate.toString(),
-                                color = White
-                            )
-                        },
-                        onClickItem = { showDialog = true }
-                    )
+                    item {
+                        Item(
+                            title = stringResource(R.string.actual_exchange),
+                            subtitle = stringResource(R.string.insert_own_exchange),
+                            trailing = {
+                                TextComponent(
+                                    fontSize = 17.sp,
+                                    text = state.value.rate.rate.toString(),
+                                    color = White
+                                )
+                            },
+                            onClickItem = { showDialog = true }
+                        )
+                    }
                 }
             }
-        }
-    }
-
-
-    if (showDialog) {
-        DialogComponent(
-            title = stringResource(R.string.update_rate_of_exchange),
-            titleButton = stringResource(R.string.modify),
-            setShowDialog = { showDialog = it },
-            content = {
-                TextFieldComponent(
-                    placeholder = "Taux",
-                    maxLines = 1,
-                    textField = rateTextField,
-                    keyboardType = KeyboardType.Number,
-                    onValueChange = { rateTextField = it }
-                )
-            },
-            onClick = {
-                viewModel.insertRate(rate = Rate(rateId = null, rate = rateTextField.toInt()))
-                showDialog = false
-            }
         )
-    }
 
+
+        if (showDialog) {
+            DialogComponent(
+                title = stringResource(R.string.update_rate_of_exchange),
+                titleButton = stringResource(R.string.modify),
+                setShowDialog = { showDialog = it },
+                content = {
+                    TextFieldComponent(
+                        placeholder = "Taux",
+                        maxLines = 1,
+                        textField = rateTextField,
+                        keyboardType = KeyboardType.Number,
+                        onValueChange = { rateTextField = it }
+                    )
+                },
+                onClick = {
+                    viewModel.insertRate(rate = Rate(rateId = null, rate = rateTextField.toInt()))
+                    showDialog = false
+                }
+            )
+        }
+
+    }
 }

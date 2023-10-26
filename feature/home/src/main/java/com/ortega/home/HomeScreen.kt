@@ -108,7 +108,7 @@ fun HomeScreen(
                 Item(
                     image = Icons.Rounded.Category,
                     title = state.value.categories.toString(),
-                    subtitle = stringResource(id = com.ortega.categories.R.string.category)
+                    subtitle = stringResource(id = R.string.categor)
                 )
 
             }

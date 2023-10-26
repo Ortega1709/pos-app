@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="category">Catégories</string>
+    <string name="nothing_category">Aucune catégorie pour le moment.</string>
+    <string name="add_new_category">Ajouter une catégorie</string>
+    <string name="add_category">Ajouter</string>
+    <string name="modify_category">Modifier une catégorie</string>
+    <string name="modify">Modifier</string>
+    <string name="delete_category">Supprimer une catégorie</string>
+    <string name="sure_delete_category">Voulez-vous vraiment supprimer cette catégorie ?</string>
+    <string name="categor">Catégories</string>
+</resources>

@@ -92,64 +92,64 @@ fun UnitScreen(drawerState: DrawerState, viewModel: UnitViewModel) {
                     contentDescription = "Add"
                 )
             }
-        }
-    ) { paddingValues ->
-
-        if (unitsLazyPagingItems.itemCount == 0) {
-            NothingScreenComponent(text = stringResource(R.string.nothing_units))
-        } else {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            ) {
-
-                item { HeightSpacer(height = Padding / 2) }
-
-                items(
-                    count = unitsLazyPagingItems.itemCount,
-                    key = unitsLazyPagingItems.itemKey { unit -> unit.unitId as Any },
-                    contentType = unitsLazyPagingItems.itemContentType { "Unit" }
+        },
+        content = { paddingValues ->
+            if (unitsLazyPagingItems.itemCount == 0) {
+                NothingScreenComponent(text = stringResource(R.string.nothing_units))
+            } else {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
                 ) {
 
-                    unitsLazyPagingItems[it]?.let { unit ->
-                        Item(
-                            title = unit.name,
-                            trailing = {
-                                Row {
-                                    IconButton(onClick = {
-                                        unitElement = unit
-                                        nameUnitField = unit.name
-                                        showUpdateDialog = true
-                                    }) {
-                                        Icon(
-                                            imageVector = Icons.Rounded.Edit,
-                                            contentDescription = "Edit",
-                                            tint = White
-                                        )
-                                    }
+                    item { HeightSpacer(height = Padding / 2) }
 
-                                    WidthSpacer(width = Padding / 8)
+                    items(
+                        count = unitsLazyPagingItems.itemCount,
+                        key = unitsLazyPagingItems.itemKey { unit -> unit.unitId as Any },
+                        contentType = unitsLazyPagingItems.itemContentType { "Unit" }
+                    ) {
 
-                                    IconButton(onClick = {
-                                        unitElement = unit
-                                        showDeleteDialog = true
-                                    }) {
-                                        Icon(
-                                            imageVector = Icons.Rounded.Delete,
-                                            contentDescription = "Delete",
-                                            tint = White
-                                        )
+                        unitsLazyPagingItems[it]?.let { unit ->
+                            Item(
+                                title = unit.name,
+                                trailing = {
+                                    Row {
+                                        IconButton(onClick = {
+                                            unitElement = unit
+                                            nameUnitField = unit.name
+                                            showUpdateDialog = true
+                                        }) {
+                                            Icon(
+                                                imageVector = Icons.Rounded.Edit,
+                                                contentDescription = "Edit",
+                                                tint = White
+                                            )
+                                        }
+
+                                        WidthSpacer(width = Padding / 8)
+
+                                        IconButton(onClick = {
+                                            unitElement = unit
+                                            showDeleteDialog = true
+                                        }) {
+                                            Icon(
+                                                imageVector = Icons.Rounded.Delete,
+                                                contentDescription = "Delete",
+                                                tint = White
+                                            )
+                                        }
                                     }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
+                    item { HeightSpacer(height = Padding * 5) }
                 }
-                item { HeightSpacer(height = Padding * 5) }
             }
         }
-    }
+    )
 
     if (showInsertDialog) {
 

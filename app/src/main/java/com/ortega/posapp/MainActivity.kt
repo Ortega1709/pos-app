@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -55,6 +56,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen(navController: NavHostController) {
@@ -92,38 +95,42 @@ fun MainScreen(navController: NavHostController) {
                 drawerContainerColor = Black,
             ) {
 
-                HeaderImageComponent()
-                screens.forEachIndexed { index, screen ->
-                    NavigationDrawerItem(
-                        colors = NavigationDrawerItemDefaults.colors(
-                            selectedContainerColor = DarkGray,
-                            unselectedContainerColor = Black
-                        ),
-                        label = { TextComponent(text = items[index], color = White) },
-                        selected = currentDestination
-                            ?.hierarchy
-                            ?.any { destination ->
-                                destination.route == screen.route
-                            } == true,
-                        icon = {
-                            Icon(
-                                tint = White,
-                                imageVector = screen.icon,
-                                contentDescription = null
-                            )
-                        },
-                        onClick = {
-                            scope.launch {
-                                drawerState.close()
-                            }
+                LazyColumn {
+                    item { HeaderImageComponent() }
+                    item {
+                        screens.forEachIndexed { index, screen ->
+                            NavigationDrawerItem(
+                                colors = NavigationDrawerItemDefaults.colors(
+                                    selectedContainerColor = DarkGray,
+                                    unselectedContainerColor = Black
+                                ),
+                                label = { TextComponent(text = items[index], color = White) },
+                                selected = currentDestination
+                                    ?.hierarchy
+                                    ?.any { destination ->
+                                        destination.route == screen.route
+                                    } == true,
+                                icon = {
+                                    Icon(
+                                        tint = White,
+                                        imageVector = screen.icon,
+                                        contentDescription = null
+                                    )
+                                },
+                                onClick = {
+                                    scope.launch {
+                                        drawerState.close()
+                                    }
 
-                            scope.launch {
-                                delay(200)
-                                navController.popBackStack()
-                                navController.navigate(screen.route)
-                            }
+                                    scope.launch {
+                                        delay(200)
+                                        navController.popBackStack()
+                                        navController.navigate(screen.route)
+                                    }
+                                }
+                            )
                         }
-                    )
+                    }
                 }
             }
         }

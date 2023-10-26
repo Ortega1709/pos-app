@@ -2,11 +2,9 @@ package com.ortega.auth.register
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Password
 import androidx.compose.material.icons.rounded.Person2
@@ -56,61 +54,67 @@ fun RegisterScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         Scaffold(
-            modifier = Modifier.fillMaxSize()
-        ) { paddingValues ->
+            modifier = Modifier.fillMaxSize(),
+            content = { paddingValues ->
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues = paddingValues)
+                ) {
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues = paddingValues)
-                    .verticalScroll(rememberScrollState())
-            ) {
+                    item {
+                        HeaderImageComponent()
+                        HeightSpacer(height = Padding)
+                        HeaderTextComponent(text = stringResource(R.string.header_text_register))
 
-                HeaderImageComponent()
-                HeightSpacer(height = Padding)
-                HeaderTextComponent(text = stringResource(R.string.header_text_register))
+                        HeightSpacer(height = Padding)
 
-                HeightSpacer(height = Padding)
+                        TextFieldComponent(
+                            imageVector = Icons.Rounded.Person2,
+                            placeholder = stringResource(R.string.name),
+                            textField = nameField,
+                            keyboardType = KeyboardType.Text,
+                            onValueChange = { nameField = it }
+                        )
 
-                TextFieldComponent(
-                    imageVector = Icons.Rounded.Person2,
-                    placeholder = stringResource(R.string.name),
-                    textField = nameField,
-                    keyboardType = KeyboardType.Text,
-                    onValueChange = { nameField = it }
-                )
+                        HeightSpacer(height = Padding)
 
-                HeightSpacer(height = Padding)
+                        PasswordFieldComponent(
+                            imageVector = Icons.Rounded.Password,
+                            placeholder = stringResource(R.string.password),
+                            textField = passwordField,
+                            keyboardType = KeyboardType.Password,
+                            onValueChange = { passwordField = it }
+                        )
 
-                PasswordFieldComponent(
-                    imageVector = Icons.Rounded.Password,
-                    placeholder = stringResource(R.string.password),
-                    textField = passwordField,
-                    keyboardType = KeyboardType.Password,
-                    onValueChange = { passwordField = it }
-                )
+                        HeightSpacer(height = Padding)
 
-                HeightSpacer(height = Padding)
+                        ButtonComponent(
+                            isLoading = uiState.isLoading,
+                            enable = !uiState.isLoading,
+                            onClick = {
+                                if (nameField != "" && passwordField != "") {
+                                    val user =
+                                        User(null, username = nameField, password = passwordField)
+                                    viewModel.insertUser(user)
 
-                ButtonComponent(
-                    isLoading = uiState.isLoading,
-                    enable = !uiState.isLoading,
-                    onClick = {
-                        if (nameField != "" && passwordField != "") {
-                            val user = User(null, username = nameField, password = passwordField)
-                            viewModel.insertUser(user)
+                                    goToLoginScreen()
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        "All fields are required",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                }
+                            },
+                            text = stringResource(R.string.save)
+                        )
+                    }
 
-                            goToLoginScreen()
-                        } else {
-                            Toast.makeText(context, "All fields are required", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    },
-                    text = stringResource(R.string.save)
-                )
+                }
             }
-
-        }
+        )
     }
 
     if (uiState.error != null) {

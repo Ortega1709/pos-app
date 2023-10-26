@@ -19,8 +19,8 @@ interface UnitDao {
     @Query("SELECT COUNT(*) FROM unit")
     suspend fun countAllUnits(): Int
 
-    @Query("DELETE FROM unit WHERE unitId = :id")
-    suspend fun deleteUnit(id: UUID)
+    @Query("DELETE FROM unit WHERE unitId = :unitId")
+    suspend fun deleteUnit(unitId: UUID)
 
     @Query("UPDATE unit SET name = :name WHERE unitId = :unitId")
     suspend fun updateUnit(name: String, unitId: UUID)

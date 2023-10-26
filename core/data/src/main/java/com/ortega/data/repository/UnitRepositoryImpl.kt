@@ -51,7 +51,7 @@ class UnitRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     override fun updateUnit(unit: Unit) = flow {
-        unit.unitId?.let { unitDao.updateUnit(name = unit.name, unitId = unit.unitId!!) }
+        unit.unitId?.let { unitDao.updateUnit(name = unit.name, unitId = it) }
         emit(unit)
     }.flowOn(Dispatchers.IO)
 

@@ -51,7 +51,7 @@ dependencies {
     implementation(project(":core:data"))
 
     implementation(project(":feature:items"))
-    implementation(project(":feature:categories"))
+    implementation(project(":feature:category"))
     implementation(project(":feature:exchange"))
     implementation(project(":feature:items"))
     implementation(project(":feature:purchases"))

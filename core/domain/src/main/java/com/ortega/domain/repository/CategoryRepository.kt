@@ -14,4 +14,6 @@ interface CategoryRepository {
 
     fun deleteCategory(category: Category): Flow<Category>
 
+    fun updateCategory(category: Category): Flow<Category>
+
 }

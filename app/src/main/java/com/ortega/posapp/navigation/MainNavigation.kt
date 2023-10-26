@@ -6,7 +6,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.ortega.categories.CategoriesScreen
+import com.ortega.category.CategoryScreen
+import com.ortega.category.CategoryViewModel
 import com.ortega.exchange.ExchangeScreen
 import com.ortega.exchange.ExchangeViewModel
 import com.ortega.home.HomeScreen
@@ -26,6 +27,7 @@ fun MainNavigation(
     val homeViewModel: HomeViewModel = hiltViewModel()
     val exchangeViewModel: ExchangeViewModel = hiltViewModel()
     val unitViewModel: UnitViewModel = hiltViewModel()
+    val categoryViewModel: CategoryViewModel = hiltViewModel()
 
     NavHost(navController = navController, startDestination = MainScreens.Home.route) {
 
@@ -42,7 +44,7 @@ fun MainNavigation(
         }
 
         composable(route = MainScreens.Categories.route) {
-            CategoriesScreen()
+            CategoryScreen(drawerState = drawerState, viewModel = categoryViewModel)
         }
 
         composable(route = MainScreens.Exchange.route) {
