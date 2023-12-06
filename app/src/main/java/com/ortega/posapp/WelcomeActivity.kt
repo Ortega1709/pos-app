@@ -42,6 +42,7 @@ class WelcomeActivity : ComponentActivity() {
 
                 startActivity(intent)
 
+
             }
 
             keepOnScreen = false

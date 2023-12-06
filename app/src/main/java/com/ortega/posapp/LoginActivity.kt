@@ -41,7 +41,6 @@ class LoginActivity : ComponentActivity() {
                     )
                 }
             }
-
         }
     }
 }

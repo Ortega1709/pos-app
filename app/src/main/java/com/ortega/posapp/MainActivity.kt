@@ -123,7 +123,7 @@ fun MainScreen(navController: NavHostController) {
                                     }
 
                                     scope.launch {
-                                        delay(200)
+                                        delay(190)
                                         navController.popBackStack()
                                         navController.navigate(screen.route)
                                     }

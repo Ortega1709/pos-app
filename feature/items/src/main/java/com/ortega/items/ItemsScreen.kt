@@ -10,12 +10,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import com.ortega.design.common.HeightSpacer
 import com.ortega.design.common.TopBarComponent
@@ -27,12 +24,10 @@ import kotlinx.coroutines.launch
 @Composable
 fun ItemsScreen(drawerState: DrawerState) {
 
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val scope = rememberCoroutineScope()
 
     Scaffold(
         modifier = Modifier
-            .nestedScroll(scrollBehavior.nestedScrollConnection)
             .fillMaxSize(),
         topBar = {
             TopBarComponent(
@@ -47,7 +42,6 @@ fun ItemsScreen(drawerState: DrawerState) {
                 },
                 actions = {},
                 title = stringResource(id = R.string.articles),
-                scrollBehavior = scrollBehavior
             )
         }
     ) { paddingValues ->
