@@ -26,6 +26,8 @@ datastore = "1.0.0"
 kotlin-plugin-version = "1.8.10"
 datastore-core = "1.0.0"
 
+compose-navigation-version = "2.7.5"
+
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -62,7 +64,7 @@ paging-runtime = { group = "androidx.paging", name = "paging-runtime-ktx", versi
 paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
 
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore"}
-androidx-datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastore-core" }
+compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose-navigation-version"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
