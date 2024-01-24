@@ -4,9 +4,9 @@ import com.ortega.database.entity.UserEntity
 import com.ortega.domain.model.User
 
 fun User.toEntity(): UserEntity {
-    return UserEntity(username = username, password = password)
+    return UserEntity(password = password)
 }
 
 fun UserEntity.toDomain(): User {
-    return User(userId = userId, username = username, password = password)
+    return User(userId = userId, password = password)
 }

@@ -12,9 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PosApp"
-        tools:targetApi="31">
+        android:enableOnBackInvokedCallback="true"
+        android:resizeableActivity="true"
+        android:hardwareAccelerated="true"
+        tools:targetApi="tiramisu">
         <activity
             android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PosApp">
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
             android:exported="true"
             android:theme="@style/Theme.PosApp">
             <intent-filter>
@@ -24,13 +32,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
-            android:exported="false"
-            android:theme="@style/Theme.PosApp" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.PosApp" />
+            android:theme="@style/Theme.PosApp">
+
+        </activity>
         <activity
             android:name=".WelcomeActivity"
             android:exported="false"

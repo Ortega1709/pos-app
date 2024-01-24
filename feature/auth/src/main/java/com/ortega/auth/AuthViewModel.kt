@@ -29,7 +29,7 @@ class AuthViewModel @Inject constructor(
             _uiState.emit(AuthUiState(isLoading = true))
 
             userRepositoryImpl.userAuthentication(password).collect {
-                _uiState.emit(AuthUiState(isLoading = true))
+                _uiState.emit(AuthUiState(isLoading = false))
             }
         }
 
@@ -41,7 +41,7 @@ class AuthViewModel @Inject constructor(
             _uiState.emit(AuthUiState(isLoading = true))
 
             userRepositoryImpl.insertUser(user).collect {
-                _uiState.emit(AuthUiState(isLoading = true, success = user))
+                _uiState.emit(AuthUiState(isLoading = false, success = user))
             }
         }
     }

@@ -69,16 +69,6 @@ fun RegisterScreen(
 
                         HeightSpacer(height = Padding)
 
-                        TextFieldComponent(
-                            imageVector = Icons.Rounded.Person2,
-                            placeholder = stringResource(R.string.name),
-                            textField = nameField,
-                            keyboardType = KeyboardType.Text,
-                            onValueChange = { nameField = it }
-                        )
-
-                        HeightSpacer(height = Padding)
-
                         PasswordFieldComponent(
                             imageVector = Icons.Rounded.Password,
                             placeholder = stringResource(R.string.password),
@@ -94,17 +84,13 @@ fun RegisterScreen(
                             enable = !uiState.isLoading,
                             onClick = {
                                 if (nameField != "" && passwordField != "") {
-                                    val user =
-                                        User(null, username = nameField, password = passwordField)
+                                    val user = User(null, password = passwordField)
                                     viewModel.insertUser(user)
 
                                     goToLoginScreen()
                                 } else {
                                     Toast.makeText(
-                                        context,
-                                        "All fields are required",
-                                        Toast.LENGTH_SHORT
-                                    )
+                                        context, "All fields are required", Toast.LENGTH_SHORT)
                                         .show()
                                 }
                             },
