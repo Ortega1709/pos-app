@@ -34,7 +34,7 @@ fun PosNavigation(
 
     val authViewModel: AuthViewModel = hiltViewModel()
 
-    NavHost(navController = navController, startDestination = PosScreens.Home.route) {
+    NavHost(navController = navController, startDestination = PosScreens.Register.route) {
 
         composable(route = PosScreens.Home.route) {
             HomeScreen(drawerState = drawerState, viewModel = homeViewModel)

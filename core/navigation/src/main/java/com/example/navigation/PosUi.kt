@@ -63,6 +63,7 @@ fun PosUi() {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
+        gesturesEnabled = enableGesture(navController = navController, screens = screens),
         drawerContent = {
             ModalDrawerSheet(
                 modifier = Modifier
