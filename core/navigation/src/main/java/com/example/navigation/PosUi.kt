@@ -37,83 +37,10 @@ import kotlinx.coroutines.launch
 fun PosUi() {
 
     val navController = rememberNavController()
-    val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
-    val screens = listOf(
-        PosScreens.Home,
-        PosScreens.Items,
-        PosScreens.Purchases,
-        PosScreens.Categories,
-        PosScreens.Exchange,
-        PosScreens.Unity
-    )
-
-    val items = listOf(
-        stringResource(com.ortega.home.R.string.dashboard),
-        stringResource(com.ortega.items.R.string.articles),
-        stringResource(com.ortega.purchases.R.string.achats),
-        stringResource(com.ortega.categories.R.string.category),
-        stringResource(com.ortega.exchange.R.string.exchange),
-        stringResource(com.ortega.unity.R.string.unity)
-    )
-
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        gesturesEnabled = enableGesture(navController = navController, screens = screens),
-        drawerContent = {
-            ModalDrawerSheet(
-                modifier = Modifier
-                    .width(300.dp),
-                drawerContainerColor = Black,
-            ) {
-
-                LazyColumn {
-                    item { HeaderImageComponent() }
-                    item {
-                        screens.forEachIndexed { index, screen ->
-                            NavigationDrawerItem(
-                                colors = NavigationDrawerItemDefaults.colors(
-                                    selectedContainerColor = DarkGray,
-                                    unselectedContainerColor = Black
-                                ),
-                                label = { TextComponent(text = items[index], color = White) },
-                                selected = currentDestination
-                                    ?.hierarchy
-                                    ?.any { destination ->
-                                        destination.route == screen.route
-                                    } == true,
-                                icon = {
-                                    screen.icon?.let {
-                                        Icon(
-                                            tint = White,
-                                            imageVector = it,
-                                            contentDescription = null
-                                        )
-                                    }
-                                },
-                                onClick = {
-                                    scope.launch {
-                                        drawerState.close()
-                                    }
-
-                                    scope.launch {
-                                        delay(190)
-                                        navController.popBackStack()
-                                        navController.navigate(screen.route)
-                                    }
-                                }
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    ) {
-        PosAppTheme {
+    PosAppTheme {
+        PosDrawerNavigation(navController = navController, drawerState = drawerState) {
             Surface(
                 color = MaterialTheme.colorScheme.primary
             ) {
@@ -121,4 +48,6 @@ fun PosUi() {
             }
         }
     }
+
 }
+
